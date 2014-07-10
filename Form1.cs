@@ -130,7 +130,26 @@ namespace vkGroupWall
             groupList.Items.Clear();
             clean_btn.Enabled = false;
         }
-        
+
+        private void check_balance_btn_Click(object sender, EventArgs e)
+        {
+            Thread tr = new Thread(checkBalance);
+            tr.IsBackground = true;
+            tr.Start();
+        }
+
+        void checkBalance()
+        {
+            balance_lbl.Text = null;
+            try
+            {
+                balance_lbl.Text = Anticaptcha.Balance(antigateKey.Text) + " $";
+            }
+            catch (Exception)
+            {
+            }
+                
+        }
 
     }
 

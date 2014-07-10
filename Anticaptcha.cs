@@ -23,5 +23,12 @@ namespace vkGroupWall
             }
             return null;
         }
+
+        public static string Balance(string key)
+        {
+            string balance = "";
+            balance = Antigate.Balance(key);
+            return balance;
+        }
     }
 }
