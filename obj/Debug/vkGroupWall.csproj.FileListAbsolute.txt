@@ -1,0 +1,19 @@
+c:\users\stas\documents\visual studio 2012\Projects\vkGroupWall\vkGroupWall\bin\Debug\vkGroupWall.exe.config
+c:\users\stas\documents\visual studio 2012\Projects\vkGroupWall\vkGroupWall\bin\Debug\vkGroupWall.exe
+c:\users\stas\documents\visual studio 2012\Projects\vkGroupWall\vkGroupWall\bin\Debug\vkGroupWall.pdb
+c:\users\stas\documents\visual studio 2012\Projects\vkGroupWall\vkGroupWall\obj\Debug\vkGroupWall.csprojResolveAssemblyReference.cache
+c:\users\stas\documents\visual studio 2012\Projects\vkGroupWall\vkGroupWall\obj\Debug\vkGroupWall.Form1.resources
+c:\users\stas\documents\visual studio 2012\Projects\vkGroupWall\vkGroupWall\obj\Debug\vkGroupWall.Properties.Resources.resources
+c:\users\stas\documents\visual studio 2012\Projects\vkGroupWall\vkGroupWall\obj\Debug\vkGroupWall.csproj.GenerateResource.Cache
+c:\users\stas\documents\visual studio 2012\Projects\vkGroupWall\vkGroupWall\obj\Debug\vkGroupWall.exe
+c:\users\stas\documents\visual studio 2012\Projects\vkGroupWall\vkGroupWall\obj\Debug\vkGroupWall.pdb
+D:\C#\vkGroupWall\vkGroupWall\bin\Debug\vkGroupWall.exe.config
+D:\C#\vkGroupWall\vkGroupWall\obj\Debug\vkGroupWall.exe
+D:\C#\vkGroupWall\vkGroupWall\obj\Debug\vkGroupWall.pdb
+D:\C#\vkGroupWall\vkGroupWall\bin\Debug\vkGroupWall.exe
+D:\C#\vkGroupWall\vkGroupWall\bin\Debug\vkGroupWall.pdb
+D:\C#\vkGroupWall\vkGroupWall\obj\Debug\vkGroupWall.csprojResolveAssemblyReference.cache
+D:\C#\vkGroupWall\vkGroupWall\obj\Debug\vkGroupWall.Form1.resources
+D:\C#\vkGroupWall\vkGroupWall\obj\Debug\vkGroupWall.Properties.Resources.resources
+D:\C#\vkGroupWall\vkGroupWall\obj\Debug\vkGroupWall.csproj.GenerateResource.Cache
+D:\C#\vkGroupWall\vkGroupWall\bin\Debug\Antigate.dll
