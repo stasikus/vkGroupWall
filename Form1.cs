@@ -35,11 +35,13 @@ namespace vkGroupWall
 
             if (status == 1)
             {
+                loadFromFile_btn.BackColor = Color.Pink;
                 loadFromFile_btn.Enabled = true;
                 if (LoadList.groups.Count > 0)
                 {
                     postBtn.Enabled = true;
                     messageTB.Enabled = true;
+                    postBtn.BackColor = Color.Pink;
                 }
             }
             else
@@ -59,6 +61,10 @@ namespace vkGroupWall
 
         void qwert()
         {
+            bool inputCaptchaType = true;
+            if (captcha_manual.Checked != true)
+                inputCaptchaType = false;
+
             for (int i = 0; i < groupList.Items.Count; i++)
             {
                 string html = http.GetHtml("https://vk.com/" + groupList.Items[i].ToString(), "");
@@ -77,9 +83,13 @@ namespace vkGroupWall
                     idForPost = publicID;
 
                 // string captchaID = http.TestCaptch(html);
-                string post = "Message=" + messageTB.Text + i.ToString() + "&act=post&al=1&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + idForPost + "&type=all";
-                string htmlResp = http.PostMessage("https://vk.com/al_wall.php", groupList.Items[i].ToString(), post, messageTB.Text, hash, idForPost);
-                //Thread.Sleep(1000);
+                for (int j = 0; j < 30; i++)
+                {
+                    string post = "Message=" + messageTB.Text + i.ToString() + "&act=post&al=1&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + idForPost + "&type=all";
+                    string htmlResp = http.PostMessage("https://vk.com/al_wall.php", "club50597259", post, messageTB.Text, hash, idForPost, inputCaptchaType);
+                
+                }
+               //Thread.Sleep(1000);
 
                 totalMessage_lbl.BeginInvoke((Action)delegate
                 {
@@ -119,6 +129,7 @@ namespace vkGroupWall
                 clean_btn.Enabled = true;
                 if (statusLbl.Text == "1")
                 {
+                    postBtn.BackColor = Color.Pink;
                     postBtn.Enabled = true;
                     messageTB.Enabled = true;
                 }
@@ -149,6 +160,20 @@ namespace vkGroupWall
             {
             }
                 
+        }
+
+        private void captcha_manual_CheckedChanged(object sender, EventArgs e)
+        {
+            if (captcha_manual.Checked == true)
+            {
+                antigateKey.Enabled = false;
+                check_balance_btn.Enabled = false;
+            }
+            else
+            {
+                antigateKey.Enabled = true;
+                check_balance_btn.Enabled = true;
+            }
         }
 
     }

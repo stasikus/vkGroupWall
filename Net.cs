@@ -11,9 +11,9 @@ using System.Xml.XPath;
 
 namespace vkGroupWall
 {
-    class Net
+    public class Net
     {
-
+        public string captchaFromForm = "";
         string remixsid;  //Id сессии
         public string lastCookies; //Куки
 
@@ -90,7 +90,7 @@ namespace vkGroupWall
             return HTML;
         }
 
-        public string PostMessage(string url, string idGroup, string postMessage, string messageTB, string hash, string GroupNum) //Возвращает содержимое поданной страницы
+        public string PostMessage(string url, string idGroup, string postMessage, string messageTB, string hash, string GroupNum, bool inputCaptchaType) //Возвращает содержимое поданной страницы
         {
             string HTML = "";
 
@@ -141,14 +141,42 @@ namespace vkGroupWall
                 }
                 HTML = myStreamReader.ReadToEnd();
 
-
+                bool flag = true;
                 /*--------------------------*/
-                if (HTML.IndexOf("input") < 0)
+                if (HTML.IndexOf("input") < 0 && inputCaptchaType == false)
                 {
                     int startHtml = HTML.IndexOf("2<!>") + 4;
                     string captchaNum = HTML.Substring(startHtml, HTML.IndexOf("<!>"));
                     //MessageBox.Show("captcha " + captchaNum);
                     string captcha = Anticaptcha.captchaPic(captchaNum);
+                    if (captcha != null)
+                    {
+                        string postCaptcha = "Message=" + messageTB + "&act=post&al=1&captcha_key=" + captcha + "&captcha_sid=" + captchaNum + "&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + GroupNum + "&type=all";
+                        string htmlRespCaptcha = PostMessageCaptcha("https://vk.com/al_wall.php", idGroup, postCaptcha);
+                    }
+                }
+                else if (HTML.IndexOf("input") < 0 && inputCaptchaType == true)
+                {
+                    int startHtml = HTML.IndexOf("<!>2<!>") + 7;
+                    string captchaNum = HTML.Substring(startHtml, HTML.IndexOf("<!>0"));
+                    
+                    //MessageBox.Show("captcha " + captchaNum);
+                    if (flag)
+                    {
+                        InputCaptchaForm inputForm1 = new InputCaptchaForm(ref captchaNum);
+                        //inputForm1.Net = this;
+                        //inputForm1.sidPic(captchaNum);
+                        inputForm1.ShowDialog();
+                        flag = false;
+                    }
+                   
+                    MessageBox.Show(captchaFromForm);                    
+                    
+                    
+                    //inputForm.sidPic(captchaNum);
+
+
+                    string captcha = "";// Anticaptcha.captchaPic(captchaNum);
                     if (captcha != null)
                     {
                         string postCaptcha = "Message=" + messageTB + "&act=post&al=1&captcha_key=" + captcha + "&captcha_sid=" + captchaNum + "&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + GroupNum + "&type=all";
@@ -171,6 +199,7 @@ namespace vkGroupWall
             }
             return HTML;
         }
+
 
         public string PostMessageCaptcha(string url, string idGroup, string postMessage) //Возвращает содержимое поданной страницы
         {
@@ -238,14 +267,6 @@ namespace vkGroupWall
             return HTML;
         }
 
-        private string TestCaptch(string html) 
-        { 
-            Regex rex1 = new Regex("captcha_sid\\\":\\\"(\\d*)\\\"", RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace); 
-            Match matc1 = rex1.Match(html); 
-            if (matc1.Groups[1].Length == 0) 
-                return "0"; 
-            return matc1.Groups[1].ToString(); 
-        } 
 
 
     }
