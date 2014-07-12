@@ -27,6 +27,9 @@ namespace vkGroupWall
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
+            loginBtn.BackColor = Color.WhiteSmoke;
+            loginBtn.Enabled = false;
+            
             string login = loginTextBox.Text;
             string password = passTextBox.Text;
 
@@ -35,17 +38,27 @@ namespace vkGroupWall
 
             if (status == 1)
             {
-                loadFromFile_btn.BackColor = Color.Pink;
+                loginBtn.Enabled = false;
+                loginBtn.BackColor = Color.WhiteSmoke;
+                loadFromFile_btn.BackColor = Color.DarkGray;
                 loadFromFile_btn.Enabled = true;
+                logout_btn.Enabled = true;
+                logout_btn.BackColor = Color.DarkGray;
                 if (LoadList.groups.Count > 0)
                 {
                     postBtn.Enabled = true;
                     messageTB.Enabled = true;
-                    postBtn.BackColor = Color.Pink;
+                    postBtn.BackColor = Color.DarkGray;
                 }
             }
             else
             {
+                logout_btn.Enabled = false;
+                logout_btn.BackColor = Color.WhiteSmoke;
+                loginBtn.BackColor = Color.DarkGray;
+                loginBtn.Enabled = true;
+                postBtn.BackColor = Color.WhiteSmoke;
+                loadFromFile_btn.BackColor = Color.WhiteSmoke;
                 loadFromFile_btn.Enabled = false;
                 postBtn.Enabled = false;
                 messageTB.Enabled = false;
@@ -82,14 +95,9 @@ namespace vkGroupWall
                 else
                     idForPost = publicID;
 
-                // string captchaID = http.TestCaptch(html);
-                for (int j = 0; j < 30; i++)
-                {
-                    string post = "Message=" + messageTB.Text + i.ToString() + "&act=post&al=1&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + idForPost + "&type=all";
-                    string htmlResp = http.PostMessage("https://vk.com/al_wall.php", "club50597259", post, messageTB.Text, hash, idForPost, inputCaptchaType);
-                
-                }
-               //Thread.Sleep(1000);
+                string post = "Message=" + messageTB.Text + i.ToString() + "&act=post&al=1&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + idForPost + "&type=all";
+                string htmlResp = http.PostMessage("https://vk.com/al_wall.php", groupList.Items[i].ToString(), post, messageTB.Text, hash, idForPost, inputCaptchaType);
+
 
                 totalMessage_lbl.BeginInvoke((Action)delegate
                 {
@@ -127,11 +135,16 @@ namespace vkGroupWall
             if (LoadList.groups.Count > 0)
             {
                 clean_btn.Enabled = true;
+                clean_btn.BackColor = Color.DarkGray;
                 if (statusLbl.Text == "1")
                 {
-                    postBtn.BackColor = Color.Pink;
+                    postBtn.BackColor = Color.DarkGray;
                     postBtn.Enabled = true;
                     messageTB.Enabled = true;
+                }
+                else
+                {
+                    postBtn.BackColor = Color.WhiteSmoke;
                 }
             }
         }
@@ -140,6 +153,7 @@ namespace vkGroupWall
         {
             groupList.Items.Clear();
             clean_btn.Enabled = false;
+            clean_btn.BackColor = Color.WhiteSmoke;
         }
 
         private void check_balance_btn_Click(object sender, EventArgs e)
@@ -168,12 +182,19 @@ namespace vkGroupWall
             {
                 antigateKey.Enabled = false;
                 check_balance_btn.Enabled = false;
+                check_balance_btn.BackColor = Color.DarkGray;
             }
             else
             {
                 antigateKey.Enabled = true;
                 check_balance_btn.Enabled = true;
+                check_balance_btn.BackColor = Color.WhiteSmoke;
             }
+        }
+
+        private void logout_btn_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

@@ -13,27 +13,28 @@ namespace vkGroupWall
 {
     public partial class InputCaptchaForm : Form
     {
-        public Net netp;
-        string result = "";
-        bool clicked = false;
-        public InputCaptchaForm(ref string refstring)
+     //   public Net netp;
+      //  string result = "";
+     //   bool clicked = false;
+      //  public string sid = "";
+        public string capchaNum = "";
+        public InputCaptchaForm(ref string sid)
         {
             InitializeComponent();
-            this.sidPic(refstring);
+            this.sidPic(sid);
         }
         
 
         public void captcha_input_btn_Click(object sender, EventArgs e)
         {
-            netp.captchaFromForm = captcha_input_TB.Text;
-           // result = captcha_input_TB.Text;
-            //clicked = true;
+            capchaNum = captcha_input_TB.Text;
+            //netp.captchaFromForm = captcha_input_TB.Text;
+            //this.netp.captchaFromForm = captcha_input_TB.Text;
             this.Close();
         }
 
         public void sidPic(string sid)
         {
-            string captchaNum = "";
             var request = WebRequest.Create("http://vk.com/captcha.php?sid=" + sid + "&s=1");
 
             using (var response = request.GetResponse())
@@ -41,12 +42,6 @@ namespace vkGroupWall
             {
                 captcha_input_pic.Image = Bitmap.FromStream(stream);
             }
-            captchaNum = captcha_input_TB.Text;
         }
-
-        private string InputCaptchaForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            return "2";
-        }             
     }
 }

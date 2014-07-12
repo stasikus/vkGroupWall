@@ -52,6 +52,7 @@
             this.captcha_manual = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.logout_btn = new System.Windows.Forms.Button();
             this.groupListBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -59,29 +60,33 @@
             // 
             // loginTextBox
             // 
+            this.loginTextBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.loginTextBox.Location = new System.Drawing.Point(158, 9);
             this.loginTextBox.Name = "loginTextBox";
-            this.loginTextBox.Size = new System.Drawing.Size(150, 20);
+            this.loginTextBox.Size = new System.Drawing.Size(150, 22);
             this.loginTextBox.TabIndex = 0;
             this.loginTextBox.Text = "staslk@ukr.net";
             // 
             // passTextBox
             // 
+            this.passTextBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.passTextBox.Location = new System.Drawing.Point(158, 48);
             this.passTextBox.Name = "passTextBox";
             this.passTextBox.PasswordChar = '*';
-            this.passTextBox.Size = new System.Drawing.Size(150, 20);
+            this.passTextBox.Size = new System.Drawing.Size(150, 22);
             this.passTextBox.TabIndex = 1;
             this.passTextBox.Text = "S83v11875";
             // 
             // loginBtn
             // 
+            this.loginBtn.BackColor = System.Drawing.Color.DarkGray;
+            this.loginBtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.loginBtn.Location = new System.Drawing.Point(13, 82);
             this.loginBtn.Name = "loginBtn";
-            this.loginBtn.Size = new System.Drawing.Size(295, 23);
+            this.loginBtn.Size = new System.Drawing.Size(199, 23);
             this.loginBtn.TabIndex = 2;
             this.loginBtn.Text = "Login";
-            this.loginBtn.UseVisualStyleBackColor = true;
+            this.loginBtn.UseVisualStyleBackColor = false;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
             // statusLbl
@@ -94,19 +99,21 @@
             // 
             // postBtn
             // 
+            this.postBtn.BackColor = System.Drawing.Color.WhiteSmoke;
             this.postBtn.Enabled = false;
+            this.postBtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.postBtn.Location = new System.Drawing.Point(12, 470);
             this.postBtn.Name = "postBtn";
             this.postBtn.Size = new System.Drawing.Size(295, 23);
             this.postBtn.TabIndex = 4;
             this.postBtn.Text = "Отправить данное сообщения на стены";
-            this.postBtn.UseVisualStyleBackColor = true;
+            this.postBtn.UseVisualStyleBackColor = false;
             this.postBtn.Click += new System.EventHandler(this.postBtn_Click);
             // 
             // messageTB
             // 
             this.messageTB.Enabled = false;
-            this.messageTB.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.messageTB.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.messageTB.Location = new System.Drawing.Point(6, 19);
             this.messageTB.Multiline = true;
             this.messageTB.Name = "messageTB";
@@ -140,28 +147,30 @@
             // 
             // clean_btn
             // 
+            this.clean_btn.BackColor = System.Drawing.Color.WhiteSmoke;
             this.clean_btn.Enabled = false;
-            this.clean_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.clean_btn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.clean_btn.ForeColor = System.Drawing.SystemColors.ControlText;
             this.clean_btn.Location = new System.Drawing.Point(125, 493);
             this.clean_btn.Name = "clean_btn";
             this.clean_btn.Size = new System.Drawing.Size(70, 23);
             this.clean_btn.TabIndex = 10;
             this.clean_btn.Text = "Очистить";
-            this.clean_btn.UseVisualStyleBackColor = true;
+            this.clean_btn.UseVisualStyleBackColor = false;
             this.clean_btn.Click += new System.EventHandler(this.clean_btn_Click);
             // 
             // loadFromFile_btn
             // 
+            this.loadFromFile_btn.BackColor = System.Drawing.Color.WhiteSmoke;
             this.loadFromFile_btn.Enabled = false;
-            this.loadFromFile_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.loadFromFile_btn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.loadFromFile_btn.ForeColor = System.Drawing.SystemColors.ControlText;
             this.loadFromFile_btn.Location = new System.Drawing.Point(6, 493);
             this.loadFromFile_btn.Name = "loadFromFile_btn";
             this.loadFromFile_btn.Size = new System.Drawing.Size(120, 23);
             this.loadFromFile_btn.TabIndex = 9;
             this.loadFromFile_btn.Text = "Загрузить с файла";
-            this.loadFromFile_btn.UseVisualStyleBackColor = true;
+            this.loadFromFile_btn.UseVisualStyleBackColor = false;
             this.loadFromFile_btn.Click += new System.EventHandler(this.loadFromFile_btn_Click);
             // 
             // groupBox1
@@ -219,15 +228,16 @@
             // 
             // check_balance_btn
             // 
+            this.check_balance_btn.BackColor = System.Drawing.Color.WhiteSmoke;
             this.check_balance_btn.Enabled = false;
-            this.check_balance_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.check_balance_btn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.check_balance_btn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.check_balance_btn.Location = new System.Drawing.Point(224, 107);
+            this.check_balance_btn.Location = new System.Drawing.Point(219, 107);
             this.check_balance_btn.Name = "check_balance_btn";
-            this.check_balance_btn.Size = new System.Drawing.Size(65, 23);
+            this.check_balance_btn.Size = new System.Drawing.Size(70, 23);
             this.check_balance_btn.TabIndex = 14;
             this.check_balance_btn.Text = "Проверка";
-            this.check_balance_btn.UseVisualStyleBackColor = true;
+            this.check_balance_btn.UseVisualStyleBackColor = false;
             this.check_balance_btn.Click += new System.EventHandler(this.check_balance_btn_Click);
             // 
             // balance_lbl
@@ -242,17 +252,17 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(6, 61);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 15);
+            this.label2.Size = new System.Drawing.Size(97, 18);
             this.label2.TabIndex = 17;
             this.label2.Text = "Ключ Antigate";
             // 
             // antigateKey
             // 
             this.antigateKey.Enabled = false;
-            this.antigateKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.antigateKey.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.antigateKey.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.antigateKey.Location = new System.Drawing.Point(6, 79);
             this.antigateKey.Name = "antigateKey";
@@ -262,10 +272,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(6, 110);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 15);
+            this.label3.Size = new System.Drawing.Size(59, 18);
             this.label3.TabIndex = 18;
             this.label3.Text = "Баланс: ";
             // 
@@ -318,12 +328,26 @@
             this.label5.TabIndex = 15;
             this.label5.Text = "Пароль";
             // 
+            // logout_btn
+            // 
+            this.logout_btn.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.logout_btn.Enabled = false;
+            this.logout_btn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.logout_btn.Location = new System.Drawing.Point(218, 82);
+            this.logout_btn.Name = "logout_btn";
+            this.logout_btn.Size = new System.Drawing.Size(89, 23);
+            this.logout_btn.TabIndex = 16;
+            this.logout_btn.Text = "Log out";
+            this.logout_btn.UseVisualStyleBackColor = false;
+            this.logout_btn.Click += new System.EventHandler(this.logout_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GrayText;
             this.ClientSize = new System.Drawing.Size(540, 536);
+            this.Controls.Add(this.logout_btn);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox2);
@@ -374,6 +398,7 @@
         private System.Windows.Forms.RadioButton captcha_manual;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button logout_btn;
     }
 }
 

@@ -13,7 +13,8 @@ namespace vkGroupWall
 {
     public class Net
     {
-        public string captchaFromForm = "";
+        public string captchaFromForm {get; set;}
+
         string remixsid;  //Id сессии
         public string lastCookies; //Куки
 
@@ -141,45 +142,31 @@ namespace vkGroupWall
                 }
                 HTML = myStreamReader.ReadToEnd();
 
-                bool flag = true;
                 /*--------------------------*/
                 if (HTML.IndexOf("input") < 0 && inputCaptchaType == false)
                 {
                     int startHtml = HTML.IndexOf("2<!>") + 4;
-                    string captchaNum = HTML.Substring(startHtml, HTML.IndexOf("<!>"));
+                    string captchaSid = HTML.Substring(startHtml, HTML.IndexOf("<!>"));
                     //MessageBox.Show("captcha " + captchaNum);
-                    string captcha = Anticaptcha.captchaPic(captchaNum);
+                    string captcha = Anticaptcha.captchaPic(captchaSid);
                     if (captcha != null)
                     {
-                        string postCaptcha = "Message=" + messageTB + "&act=post&al=1&captcha_key=" + captcha + "&captcha_sid=" + captchaNum + "&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + GroupNum + "&type=all";
+                        string postCaptcha = "Message=" + messageTB + "&act=post&al=1&captcha_key=" + captcha + "&captcha_sid=" + captchaSid + "&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + GroupNum + "&type=all";
                         string htmlRespCaptcha = PostMessageCaptcha("https://vk.com/al_wall.php", idGroup, postCaptcha);
                     }
                 }
                 else if (HTML.IndexOf("input") < 0 && inputCaptchaType == true)
                 {
                     int startHtml = HTML.IndexOf("<!>2<!>") + 7;
-                    string captchaNum = HTML.Substring(startHtml, HTML.IndexOf("<!>0"));
+                    string captchaSid = HTML.Substring(startHtml, HTML.IndexOf("<!>0"));
                     
-                    //MessageBox.Show("captcha " + captchaNum);
-                    if (flag)
-                    {
-                        InputCaptchaForm inputForm1 = new InputCaptchaForm(ref captchaNum);
-                        //inputForm1.Net = this;
-                        //inputForm1.sidPic(captchaNum);
-                        inputForm1.ShowDialog();
-                        flag = false;
-                    }
-                   
-                    MessageBox.Show(captchaFromForm);                    
-                    
-                    
-                    //inputForm.sidPic(captchaNum);
+                    InputCaptchaForm inputForm = new InputCaptchaForm(ref captchaSid);
+                    inputForm.ShowDialog();
+                    captchaFromForm = inputForm.capchaNum;
 
-
-                    string captcha = "";// Anticaptcha.captchaPic(captchaNum);
-                    if (captcha != null)
+                    if (captchaFromForm != "")
                     {
-                        string postCaptcha = "Message=" + messageTB + "&act=post&al=1&captcha_key=" + captcha + "&captcha_sid=" + captchaNum + "&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + GroupNum + "&type=all";
+                        string postCaptcha = "Message=" + messageTB + "&act=post&al=1&captcha_key=" + captchaFromForm + "&captcha_sid=" + captchaSid + "&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + GroupNum + "&type=all";
                         string htmlRespCaptcha = PostMessageCaptcha("https://vk.com/al_wall.php", idGroup, postCaptcha);
                     }
                 }
