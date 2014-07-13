@@ -11,12 +11,13 @@ namespace vkGroupWall
     {
         static string PuthToPicture;
 
-        public static string captchaPic(string sid)
+        public static string captchaPic(string sid, string antigateKey)
         {
             PuthToPicture = Antigate.Download_Captcha("http://vk.com/captcha.php?sid=" + sid + "");
             if (PuthToPicture != "")
             {
-                Antigate.Key = "2ce2be021b8bd05b8c210af8aaeeb3d1";
+                Antigate.Key = antigateKey;
+                //2ce2be021b8bd05b8c210af8aaeeb3d1
                 string stringCaptcha = Antigate.Recognize(PuthToPicture);
                 //MessageBox.Show("Captcha num = " +stringCaptcha);
                 return stringCaptcha;

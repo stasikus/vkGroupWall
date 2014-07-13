@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.loginTextBox = new System.Windows.Forms.TextBox();
             this.passTextBox = new System.Windows.Forms.TextBox();
             this.loginBtn = new System.Windows.Forms.Button();
@@ -46,7 +47,7 @@
             this.check_balance_btn = new System.Windows.Forms.Button();
             this.balance_lbl = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.antigateKey = new System.Windows.Forms.TextBox();
+            this.antigateKey_TB = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.captcha_manual = new System.Windows.Forms.RadioButton();
@@ -92,7 +93,7 @@
             // statusLbl
             // 
             this.statusLbl.AutoSize = true;
-            this.statusLbl.Location = new System.Drawing.Point(57, 132);
+            this.statusLbl.Location = new System.Drawing.Point(0, 0);
             this.statusLbl.Name = "statusLbl";
             this.statusLbl.Size = new System.Drawing.Size(0, 13);
             this.statusLbl.TabIndex = 3;
@@ -213,7 +214,7 @@
             this.groupBox2.Controls.Add(this.check_balance_btn);
             this.groupBox2.Controls.Add(this.balance_lbl);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.antigateKey);
+            this.groupBox2.Controls.Add(this.antigateKey_TB);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.radioButton2);
             this.groupBox2.Controls.Add(this.captcha_manual);
@@ -244,10 +245,11 @@
             // 
             this.balance_lbl.AutoSize = true;
             this.balance_lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.balance_lbl.Location = new System.Drawing.Point(67, 110);
+            this.balance_lbl.Location = new System.Drawing.Point(70, 111);
             this.balance_lbl.Name = "balance_lbl";
             this.balance_lbl.Size = new System.Drawing.Size(0, 15);
             this.balance_lbl.TabIndex = 19;
+            this.balance_lbl.Text = "0";
             // 
             // label2
             // 
@@ -259,15 +261,16 @@
             this.label2.TabIndex = 17;
             this.label2.Text = "Ключ Antigate";
             // 
-            // antigateKey
+            // antigateKey_TB
             // 
-            this.antigateKey.Enabled = false;
-            this.antigateKey.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.antigateKey.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.antigateKey.Location = new System.Drawing.Point(6, 79);
-            this.antigateKey.Name = "antigateKey";
-            this.antigateKey.Size = new System.Drawing.Size(283, 22);
-            this.antigateKey.TabIndex = 16;
+            this.antigateKey_TB.Enabled = false;
+            this.antigateKey_TB.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.antigateKey_TB.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.antigateKey_TB.Location = new System.Drawing.Point(6, 79);
+            this.antigateKey_TB.Name = "antigateKey_TB";
+            this.antigateKey_TB.Size = new System.Drawing.Size(283, 22);
+            this.antigateKey_TB.TabIndex = 16;
+            this.antigateKey_TB.Text = "2ce2be021b8bd05b8c210af8aaeeb3d1";
             // 
             // label3
             // 
@@ -360,8 +363,8 @@
             this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.passTextBox);
             this.Controls.Add(this.loginTextBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "VK";
             this.groupListBox.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -392,7 +395,7 @@
         private System.Windows.Forms.Button check_balance_btn;
         private System.Windows.Forms.Label balance_lbl;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox antigateKey;
+        private System.Windows.Forms.TextBox antigateKey_TB;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton captcha_manual;

@@ -91,7 +91,7 @@ namespace vkGroupWall
             return HTML;
         }
 
-        public string PostMessage(string url, string idGroup, string postMessage, string messageTB, string hash, string GroupNum, bool inputCaptchaType) //Возвращает содержимое поданной страницы
+        public string PostMessage(string url, string idGroup, string postMessage, string messageTB, string hash, string GroupNum, bool inputCaptchaType, string antigateKeyTB) //Возвращает содержимое поданной страницы
         {
             string HTML = "";
 
@@ -148,10 +148,10 @@ namespace vkGroupWall
                     int startHtml = HTML.IndexOf("2<!>") + 4;
                     string captchaSid = HTML.Substring(startHtml, HTML.IndexOf("<!>"));
                     //MessageBox.Show("captcha " + captchaNum);
-                    string captcha = Anticaptcha.captchaPic(captchaSid);
+                    string captcha = Anticaptcha.captchaPic(captchaSid, antigateKeyTB);
                     if (captcha != null)
                     {
-                        string postCaptcha = "Message=" + messageTB + "&act=post&al=1&captcha_key=" + captcha + "&captcha_sid=" + captchaSid + "&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + GroupNum + "&type=all";
+                        string postCaptcha = "Message=" + System.Web.HttpUtility.UrlEncode(messageTB) + "&act=post&al=1&captcha_key=" + captcha + "&captcha_sid=" + captchaSid + "&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + GroupNum + "&type=all";
                         string htmlRespCaptcha = PostMessageCaptcha("https://vk.com/al_wall.php", idGroup, postCaptcha);
                     }
                 }
@@ -166,7 +166,7 @@ namespace vkGroupWall
 
                     if (captchaFromForm != "")
                     {
-                        string postCaptcha = "Message=" + messageTB + "&act=post&al=1&captcha_key=" + captchaFromForm + "&captcha_sid=" + captchaSid + "&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + GroupNum + "&type=all";
+                        string postCaptcha = "Message=" + System.Web.HttpUtility.UrlEncode(messageTB) + "&act=post&al=1&captcha_key=" + captchaFromForm + "&captcha_sid=" + captchaSid + "&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + GroupNum + "&type=all";
                         string htmlRespCaptcha = PostMessageCaptcha("https://vk.com/al_wall.php", idGroup, postCaptcha);
                     }
                 }

@@ -44,6 +44,8 @@ namespace vkGroupWall
                 loadFromFile_btn.Enabled = true;
                 logout_btn.Enabled = true;
                 logout_btn.BackColor = Color.DarkGray;
+                loginTextBox.Enabled = false;
+                passTextBox.Enabled = false;
                 if (LoadList.groups.Count > 0)
                 {
                     postBtn.Enabled = true;
@@ -53,6 +55,8 @@ namespace vkGroupWall
             }
             else
             {
+                loginTextBox.Enabled = true;
+                passTextBox.Enabled = true;
                 logout_btn.Enabled = false;
                 logout_btn.BackColor = Color.WhiteSmoke;
                 loginBtn.BackColor = Color.DarkGray;
@@ -62,6 +66,7 @@ namespace vkGroupWall
                 loadFromFile_btn.Enabled = false;
                 postBtn.Enabled = false;
                 messageTB.Enabled = false;
+                MessageBox.Show("Неверный пароль или аккаунт заблокирован");
             }
         }
 
@@ -95,8 +100,8 @@ namespace vkGroupWall
                 else
                     idForPost = publicID;
 
-                string post = "Message=" + messageTB.Text + i.ToString() + "&act=post&al=1&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + idForPost + "&type=all";
-                string htmlResp = http.PostMessage("https://vk.com/al_wall.php", groupList.Items[i].ToString(), post, messageTB.Text, hash, idForPost, inputCaptchaType);
+                string post = "Message=" + System.Web.HttpUtility.UrlEncode(messageTB.Text) + i.ToString() + "&act=post&al=1&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + idForPost + "&type=all";
+                string htmlResp = http.PostMessage("https://vk.com/al_wall.php", groupList.Items[i].ToString(), post, messageTB.Text, hash, idForPost, inputCaptchaType, antigateKey_TB.Text);
 
 
                 totalMessage_lbl.BeginInvoke((Action)delegate
@@ -104,6 +109,7 @@ namespace vkGroupWall
                     totalMessage_lbl.Text = (i + 1).ToString();
                 });
             }
+            MessageBox.Show("Все сообщения были отправлены");
         }
 
         private void postBtn_Click(object sender, EventArgs e)
@@ -123,6 +129,7 @@ namespace vkGroupWall
             string path;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                groupList.Items.Clear();
                 path = openFileDialog.FileName;
                 LoadList.loadList(path);
             }
@@ -151,6 +158,7 @@ namespace vkGroupWall
 
         private void clean_btn_Click(object sender, EventArgs e)
         {
+            //MessageBox.Show(groupList.Items.Count + " " + LoadList.groups.Count);
             groupList.Items.Clear();
             clean_btn.Enabled = false;
             clean_btn.BackColor = Color.WhiteSmoke;
@@ -158,6 +166,7 @@ namespace vkGroupWall
 
         private void check_balance_btn_Click(object sender, EventArgs e)
         {
+            balance_lbl.Text = "0";
             Thread tr = new Thread(checkBalance);
             tr.IsBackground = true;
             tr.Start();
@@ -165,13 +174,16 @@ namespace vkGroupWall
 
         void checkBalance()
         {
-            balance_lbl.Text = null;
             try
             {
-                balance_lbl.Text = Anticaptcha.Balance(antigateKey.Text) + " $";
+                balance_lbl.BeginInvoke((Action)delegate
+                {
+                    balance_lbl.Text = Anticaptcha.Balance(antigateKey_TB.Text) + " $";
+                });
             }
             catch (Exception)
             {
+                MessageBox.Show("Данный ключ не валидный");
             }
                 
         }
@@ -180,22 +192,36 @@ namespace vkGroupWall
         {
             if (captcha_manual.Checked == true)
             {
-                antigateKey.Enabled = false;
+                antigateKey_TB.Enabled = false;
                 check_balance_btn.Enabled = false;
-                check_balance_btn.BackColor = Color.DarkGray;
+                check_balance_btn.BackColor = Color.WhiteSmoke;
             }
             else
             {
-                antigateKey.Enabled = true;
+                antigateKey_TB.Enabled = true;
                 check_balance_btn.Enabled = true;
-                check_balance_btn.BackColor = Color.WhiteSmoke;
+                check_balance_btn.BackColor = Color.DarkGray;
             }
         }
 
         private void logout_btn_Click(object sender, EventArgs e)
         {
+            loginTextBox.Enabled = true;
+            passTextBox.Enabled = true;
+            loginBtn.Enabled = true;
+            loginBtn.BackColor = Color.DarkGray;
+            logout_btn.Enabled = false;
+            logout_btn.BackColor = Color.WhiteSmoke;
+            loadFromFile_btn.Enabled = false;
+            loadFromFile_btn.BackColor = Color.WhiteSmoke;
+            clean_btn.Enabled = false;
+            clean_btn.BackColor = Color.WhiteSmoke;
+            messageTB.Enabled = false;
+            postBtn.Enabled = false;
+            postBtn.BackColor = Color.WhiteSmoke;
 
         }
+
 
     }
 
