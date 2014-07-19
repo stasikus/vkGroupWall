@@ -28,12 +28,12 @@ C:\Users\s.o.kravchenko\Documents\GitHub\vkGroupWall\vkGroupWall\obj\Debug\vkGro
 C:\Users\s.o.kravchenko\Documents\GitHub\vkGroupWall\vkGroupWall\obj\Debug\vkGroupWall.pdb
 C:\Users\s.o.kravchenko\Documents\GitHub\vkGroupWall\vkGroupWall\obj\Debug\vkGroupWall.csprojResolveAssemblyReference.cache
 D:\Git\vkGroupWall\bin\Debug\vkGroupWall.exe.config
-D:\Git\vkGroupWall\obj\Debug\vkGroupWall.exe
-D:\Git\vkGroupWall\obj\Debug\vkGroupWall.pdb
 D:\Git\vkGroupWall\bin\Debug\vkGroupWall.exe
 D:\Git\vkGroupWall\bin\Debug\vkGroupWall.pdb
-D:\Git\vkGroupWall\obj\Debug\vkGroupWall.csprojResolveAssemblyReference.cache
 D:\Git\vkGroupWall\obj\Debug\vkGroupWall.Form1.resources
 D:\Git\vkGroupWall\obj\Debug\vkGroupWall.InputCaptchaForm.resources
 D:\Git\vkGroupWall\obj\Debug\vkGroupWall.Properties.Resources.resources
 D:\Git\vkGroupWall\obj\Debug\vkGroupWall.csproj.GenerateResource.Cache
+D:\Git\vkGroupWall\obj\Debug\vkGroupWall.exe
+D:\Git\vkGroupWall\obj\Debug\vkGroupWall.pdb
+D:\Git\vkGroupWall\obj\Debug\vkGroupWall.csprojResolveAssemblyReference.cache

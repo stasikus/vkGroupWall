@@ -100,23 +100,44 @@ namespace vkGroupWall
                 else
                     idForPost = publicID;
 
-                string post = "Message=" + System.Web.HttpUtility.UrlEncode(messageTB.Text) + i.ToString() + "&act=post&al=1&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + idForPost + "&type=all";
+                string post = "Message=" + System.Web.HttpUtility.UrlEncode(messageTB.Text) + "&act=post&al=1&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + idForPost + "&type=all";
                 string htmlResp = http.PostMessage("https://vk.com/al_wall.php", groupList.Items[i].ToString(), post, messageTB.Text, hash, idForPost, inputCaptchaType, antigateKey_TB.Text);
 
+                int errorHtml = htmlResp.IndexOf("<!>8<!>");
 
-                totalMessage_lbl.BeginInvoke((Action)delegate
+                if (errorHtml == -1)
                 {
-                    totalMessage_lbl.Text = (i + 1).ToString();
-                });
+                    totalMessage_lbl.BeginInvoke((Action)delegate
+                    {
+                        totalMessage_lbl.Text = TotalMessages.SuccessMessages().ToString();
+                    });
+                }
+                else
+                {
+
+                    totalErrorMsg_lbl.BeginInvoke((Action)delegate
+                    {
+                        totalErrorMsg_lbl.Text = TotalMessages.FailMessages().ToString();
+                    });
+                }
+
+                
             }
             MessageBox.Show("Все сообщения были отправлены");
+            panel1.BeginInvoke((Action)delegate
+            {
+                panel1.Enabled = true;
+                postActive();
+            });
         }
 
         private void postBtn_Click(object sender, EventArgs e)
         {
             if (messageTB.TextLength > 0)
             {
+                postNotActive();
                 postWall();
+                panel1.Enabled = false;
             }
             else
             {
@@ -219,9 +240,27 @@ namespace vkGroupWall
             messageTB.Enabled = false;
             postBtn.Enabled = false;
             postBtn.BackColor = Color.WhiteSmoke;
-
         }
 
+        public void postNotActive()
+        {
+            postBtn.BackColor = Color.WhiteSmoke;
+            logout_btn.BackColor = Color.WhiteSmoke;
+            loadFromFile_btn.BackColor = Color.WhiteSmoke;
+            clean_btn.BackColor = Color.WhiteSmoke;
+            check_balance_btn.BackColor = Color.WhiteSmoke;
+        }
+
+        public void postActive()
+        {
+            postBtn.BackColor = Color.DarkGray;
+            logout_btn.BackColor = Color.DarkGray;
+            loadFromFile_btn.BackColor = Color.DarkGray;
+            clean_btn.BackColor = Color.DarkGray;
+
+            if(captcha_antigate.Checked == true)
+                check_balance_btn.BackColor = Color.DarkGray;
+        }
 
 
 

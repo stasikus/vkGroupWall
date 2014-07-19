@@ -29,7 +29,13 @@ namespace vkGroupWall
         {
             string balance = "";
             balance = Antigate.Balance(key);
-            return balance;
+            if (balance == "ERROR_WRONG_USER_KEY")
+            {
+                MessageBox.Show("Ключ введен неверно");
+                return "0";
+            }
+            else
+                return balance;
         }
     }
 }
