@@ -134,9 +134,9 @@
             this.groupList.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupList.FormattingEnabled = true;
             this.groupList.ItemHeight = 15;
-            this.groupList.Location = new System.Drawing.Point(6, 21);
+            this.groupList.Location = new System.Drawing.Point(6, 20);
             this.groupList.Name = "groupList";
-            this.groupList.Size = new System.Drawing.Size(188, 469);
+            this.groupList.Size = new System.Drawing.Size(188, 214);
             this.groupList.TabIndex = 7;
             // 
             // groupListBox
@@ -146,9 +146,9 @@
             this.groupListBox.Controls.Add(this.loadFromFile_btn);
             this.groupListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupListBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.groupListBox.Location = new System.Drawing.Point(318, 0);
+            this.groupListBox.Location = new System.Drawing.Point(318, 256);
             this.groupListBox.Name = "groupListBox";
-            this.groupListBox.Size = new System.Drawing.Size(200, 520);
+            this.groupListBox.Size = new System.Drawing.Size(200, 264);
             this.groupListBox.TabIndex = 8;
             this.groupListBox.TabStop = false;
             this.groupListBox.Text = "Список групп";
@@ -159,7 +159,7 @@
             this.clean_btn.Enabled = false;
             this.clean_btn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.clean_btn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.clean_btn.Location = new System.Drawing.Point(125, 493);
+            this.clean_btn.Location = new System.Drawing.Point(125, 236);
             this.clean_btn.Name = "clean_btn";
             this.clean_btn.Size = new System.Drawing.Size(70, 23);
             this.clean_btn.TabIndex = 10;
@@ -173,7 +173,7 @@
             this.loadFromFile_btn.Enabled = false;
             this.loadFromFile_btn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.loadFromFile_btn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.loadFromFile_btn.Location = new System.Drawing.Point(6, 493);
+            this.loadFromFile_btn.Location = new System.Drawing.Point(6, 236);
             this.loadFromFile_btn.Name = "loadFromFile_btn";
             this.loadFromFile_btn.Size = new System.Drawing.Size(120, 23);
             this.loadFromFile_btn.TabIndex = 9;
@@ -440,7 +440,7 @@
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(526, 589);
+            this.panel1.Size = new System.Drawing.Size(599, 589);
             this.panel1.TabIndex = 22;
             // 
             // Form1
@@ -448,7 +448,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GrayText;
-            this.ClientSize = new System.Drawing.Size(525, 607);
+            this.ClientSize = new System.Drawing.Size(716, 607);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
