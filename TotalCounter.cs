@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace vkGroupWall
 {
-    class TotalMessages
+    class TotalCounter
     {
         public static int SuccessNum;
         public static int FailNum;
+        public static int Valid;
+        public static int Invalid;
 
         public static int SuccessMessages()
         {
@@ -22,5 +24,17 @@ namespace vkGroupWall
             FailNum++;
             return FailNum;
         }
+
+        public static int ValidAccs()
+        {
+            Valid++;
+            return Valid;
+        }
+
+        public static int InvalidAccs()
+        {
+            Invalid++;
+            return Invalid;
+        } 
     }
 }

@@ -23,22 +23,49 @@ namespace vkGroupWall
 
         Net http = new Net(); //Создаем объект
         string html = "";
-        
+        int accsTypes;
 
-        private void loginBtn_Click(object sender, EventArgs e)
+        public void loginBtn_Click(object sender, EventArgs e)
         {
-            loginBtn.BackColor = Color.WhiteSmoke;
-            loginBtn.Enabled = false;
-            
-            string login = loginTextBox.Text;
-            string password = passTextBox.Text;
+            if (LoadUsers.users.Count > 0)
+            {
+                accsTypes = 0;
+                for (int i = 0; i < LoadUsers.users.Count; i++)
+                {
+                    Thread tr = new Thread(() => loginFunc(LoadUsers.userDictionary.ElementAt(i).Key, LoadUsers.userDictionary.ElementAt(i).Value, accsTypes));
+                    tr.IsBackground = true;
+                    tr.Start();
+                    Thread.Sleep(1000);
+                }
+            }
+            else
+            {
+                accsTypes = 1;
+                loginFunc(loginTextBox.Text, passTextBox.Text, accsTypes);
+            }
+        }
 
-            int status = vkLogin.Login(login, password, html, http); //Login
-            statusLbl.Text = status.ToString();
+        public void loginFunc(string login, string pass, int accsType)
+        {
+           // loginBtn.BackColor = Color.WhiteSmoke;
+           // loginBtn.Enabled = false;
+
+         //   string login = loginTextBox.Text;
+         //   string password = passTextBox.Text;
+
+            int status = vkLogin.Login(login, pass, html, http); //Login
+           // statusLbl.Text = status.ToString();
 
             if (status == 1)
             {
-                loginBtn.Enabled = false;
+                if (accsType == 0)
+                {
+                    validAccs_lbl.BeginInvoke((Action)delegate
+                    {
+                        validAccs_lbl.Text = TotalCounter.ValidAccs().ToString();
+                    });
+                }
+                /*loginBtn.Enabled = false;
                 loginBtn.BackColor = Color.WhiteSmoke;
                 loadFromFile_btn.BackColor = Color.DarkGray;
                 loadFromFile_btn.Enabled = true;
@@ -51,11 +78,11 @@ namespace vkGroupWall
                     postBtn.Enabled = true;
                     messageTB.Enabled = true;
                     postBtn.BackColor = Color.DarkGray;
-                }
+                }*/
             }
             else
             {
-                loginTextBox.Enabled = true;
+                /*loginTextBox.Enabled = true;
                 passTextBox.Enabled = true;
                 logout_btn.Enabled = false;
                 logout_btn.BackColor = Color.WhiteSmoke;
@@ -65,8 +92,16 @@ namespace vkGroupWall
                 loadFromFile_btn.BackColor = Color.WhiteSmoke;
                 loadFromFile_btn.Enabled = false;
                 postBtn.Enabled = false;
-                messageTB.Enabled = false;
-                MessageBox.Show("Неверный пароль или аккаунт заблокирован");
+                messageTB.Enabled = false;*/
+                if (accsType == 1)
+                    MessageBox.Show("Неверный пароль или аккаунт заблокирован");
+                else
+                {
+                    notValidAccs_lbl.BeginInvoke((Action)delegate
+                    {
+                        notValidAccs_lbl.Text = TotalCounter.InvalidAccs().ToString();
+                    });
+                }
             }
         }
 
@@ -109,7 +144,7 @@ namespace vkGroupWall
                 {
                     totalMessage_lbl.BeginInvoke((Action)delegate
                     {
-                        totalMessage_lbl.Text = TotalMessages.SuccessMessages().ToString();
+                        totalMessage_lbl.Text = TotalCounter.SuccessMessages().ToString();
                     });
                 }
                 else
@@ -117,7 +152,7 @@ namespace vkGroupWall
 
                     totalErrorMsg_lbl.BeginInvoke((Action)delegate
                     {
-                        totalErrorMsg_lbl.Text = TotalMessages.FailMessages().ToString();
+                        totalErrorMsg_lbl.Text = TotalCounter.FailMessages().ToString();
                     });
                 }
 
@@ -260,6 +295,48 @@ namespace vkGroupWall
 
             if(captcha_antigate.Checked == true)
                 check_balance_btn.BackColor = Color.DarkGray;
+        }
+
+        private void loadAccFromFile_Click(object sender, EventArgs e)
+        {
+            string path;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                groupList.Items.Clear();
+                path = openFileDialog.FileName;
+                LoadUsers.loadList(path);
+            }
+            if (LoadUsers.users.Count != 0)
+            {
+                loadAccs_lbl.Text = LoadUsers.users.Count.ToString();
+                cleanUser_btn.Enabled = true;
+                cleanUser_btn.BackColor = Color.DarkGray;
+                loginTextBox.Enabled = false;
+                passTextBox.Enabled = false;
+            }
+            else
+            {
+                cleanUser_btn.Enabled = false;
+                cleanUser_btn.BackColor = Color.WhiteSmoke;
+                loginTextBox.Enabled = true;
+                passTextBox.Enabled = true;
+                MessageBox.Show("В файле не найдено юзеров");
+            }
+        }
+
+        private void cleanUser_btn_Click(object sender, EventArgs e)
+        {
+            LoadUsers.users.Clear();
+            LoadUsers.userDictionary.Clear();
+            cleanUser_btn.Enabled = false;
+            cleanUser_btn.BackColor = Color.WhiteSmoke;
+            loginTextBox.Enabled = true;
+            passTextBox.Enabled = true;
+            loadAccs_lbl.Text = "0";
+            TotalCounter.Invalid = 0;
+            TotalCounter.Valid = 0;
+            validAccs_lbl.Text = "0";
+            notValidAccs_lbl.Text = "0";
         }
 
 
