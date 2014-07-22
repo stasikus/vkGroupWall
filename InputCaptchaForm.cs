@@ -13,10 +13,6 @@ namespace vkGroupWall
 {
     public partial class InputCaptchaForm : Form
     {
-     //   public Net netp;
-      //  string result = "";
-     //   bool clicked = false;
-      //  public string sid = "";
         public string capchaNum = "";
         public InputCaptchaForm(ref string sid)
         {
@@ -28,8 +24,6 @@ namespace vkGroupWall
         public void captcha_input_btn_Click(object sender, EventArgs e)
         {
             capchaNum = captcha_input_TB.Text;
-            //netp.captchaFromForm = captcha_input_TB.Text;
-            //this.netp.captchaFromForm = captcha_input_TB.Text;
             this.Close();
         }
 

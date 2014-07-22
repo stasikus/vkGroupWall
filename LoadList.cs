@@ -10,8 +10,9 @@ namespace vkGroupWall
     class LoadList
     {
         public static List<string> groups = new List<string>();
+        public static List<string> proxys = new List<string>();
 
-        public static void loadList(string path)
+        public static void loadGroupList(string path)
         {
             groups = new List<string>();
             using (var sr = new StreamReader(path))
@@ -23,6 +24,27 @@ namespace vkGroupWall
                     {
                         groups = groups.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
                     }
+                }
+            }
+        }
+
+        public static void loadProxyList(string path)
+        {
+            var logFile = ReadLogLines(path);
+            foreach (var s in logFile)
+            {
+                proxys.Add(s);
+            }
+        }
+
+        public static IEnumerable<string> ReadLogLines(string filePath)
+        {
+            using (StreamReader reader = File.OpenText(filePath))
+            {
+                string line = "";
+                while ((line = reader.ReadLine()) != null)
+                {
+                    yield return line;
                 }
             }
         }

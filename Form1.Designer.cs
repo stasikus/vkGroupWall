@@ -64,6 +64,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cleanUser_btn = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.loadAccs_lbl = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -72,11 +73,10 @@
             this.validAccs_lbl = new System.Windows.Forms.Label();
             this.loadAccFromFile = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cleanProxy_btn = new System.Windows.Forms.Button();
+            this.addProxy_btn = new System.Windows.Forms.Button();
+            this.loadProxy_btn = new System.Windows.Forms.Button();
             this.proxyList = new System.Windows.Forms.ListBox();
-            this.cleanUser_btn = new System.Windows.Forms.Button();
             this.groupListBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -509,6 +509,19 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Мульти акк";
             // 
+            // cleanUser_btn
+            // 
+            this.cleanUser_btn.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cleanUser_btn.Enabled = false;
+            this.cleanUser_btn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cleanUser_btn.Location = new System.Drawing.Point(215, 9);
+            this.cleanUser_btn.Name = "cleanUser_btn";
+            this.cleanUser_btn.Size = new System.Drawing.Size(65, 71);
+            this.cleanUser_btn.TabIndex = 18;
+            this.cleanUser_btn.Text = "Очистить";
+            this.cleanUser_btn.UseVisualStyleBackColor = false;
+            this.cleanUser_btn.Click += new System.EventHandler(this.cleanUser_btn_Click);
+            // 
             // label14
             // 
             this.label14.AccessibleName = "count_lbl";
@@ -595,9 +608,9 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.button3);
-            this.groupBox4.Controls.Add(this.button2);
-            this.groupBox4.Controls.Add(this.button1);
+            this.groupBox4.Controls.Add(this.cleanProxy_btn);
+            this.groupBox4.Controls.Add(this.addProxy_btn);
+            this.groupBox4.Controls.Add(this.loadProxy_btn);
             this.groupBox4.Controls.Add(this.proxyList);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
@@ -608,44 +621,45 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Proxy";
             // 
-            // button3
+            // cleanProxy_btn
             // 
-            this.button3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button3.Enabled = false;
-            this.button3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button3.Location = new System.Drawing.Point(6, 548);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(188, 23);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "Очистить";
-            this.button3.UseVisualStyleBackColor = false;
+            this.cleanProxy_btn.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cleanProxy_btn.Enabled = false;
+            this.cleanProxy_btn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cleanProxy_btn.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cleanProxy_btn.Location = new System.Drawing.Point(6, 548);
+            this.cleanProxy_btn.Name = "cleanProxy_btn";
+            this.cleanProxy_btn.Size = new System.Drawing.Size(188, 23);
+            this.cleanProxy_btn.TabIndex = 13;
+            this.cleanProxy_btn.Text = "Очистить";
+            this.cleanProxy_btn.UseVisualStyleBackColor = false;
+            this.cleanProxy_btn.Click += new System.EventHandler(this.cleanProxy_btn_Click);
             // 
-            // button2
+            // addProxy_btn
             // 
-            this.button2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button2.Enabled = false;
-            this.button2.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button2.Location = new System.Drawing.Point(100, 524);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(94, 23);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Добавить";
-            this.button2.UseVisualStyleBackColor = false;
+            this.addProxy_btn.BackColor = System.Drawing.Color.DarkGray;
+            this.addProxy_btn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.addProxy_btn.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.addProxy_btn.Location = new System.Drawing.Point(100, 523);
+            this.addProxy_btn.Name = "addProxy_btn";
+            this.addProxy_btn.Size = new System.Drawing.Size(94, 23);
+            this.addProxy_btn.TabIndex = 12;
+            this.addProxy_btn.Text = "Добавить";
+            this.addProxy_btn.UseVisualStyleBackColor = false;
+            this.addProxy_btn.Click += new System.EventHandler(this.addProxy_btn_Click);
             // 
-            // button1
+            // loadProxy_btn
             // 
-            this.button1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.Enabled = false;
-            this.button1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Location = new System.Drawing.Point(6, 524);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Загрузить";
-            this.button1.UseVisualStyleBackColor = false;
+            this.loadProxy_btn.BackColor = System.Drawing.Color.DarkGray;
+            this.loadProxy_btn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.loadProxy_btn.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.loadProxy_btn.Location = new System.Drawing.Point(6, 523);
+            this.loadProxy_btn.Name = "loadProxy_btn";
+            this.loadProxy_btn.Size = new System.Drawing.Size(94, 23);
+            this.loadProxy_btn.TabIndex = 11;
+            this.loadProxy_btn.Text = "Загрузить";
+            this.loadProxy_btn.UseVisualStyleBackColor = false;
+            this.loadProxy_btn.Click += new System.EventHandler(this.loadProxy_btn_Click);
             // 
             // proxyList
             // 
@@ -659,19 +673,6 @@
             this.proxyList.Name = "proxyList";
             this.proxyList.Size = new System.Drawing.Size(188, 499);
             this.proxyList.TabIndex = 100;
-            // 
-            // cleanUser_btn
-            // 
-            this.cleanUser_btn.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.cleanUser_btn.Enabled = false;
-            this.cleanUser_btn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cleanUser_btn.Location = new System.Drawing.Point(215, 9);
-            this.cleanUser_btn.Name = "cleanUser_btn";
-            this.cleanUser_btn.Size = new System.Drawing.Size(65, 71);
-            this.cleanUser_btn.TabIndex = 18;
-            this.cleanUser_btn.Text = "Очистить";
-            this.cleanUser_btn.UseVisualStyleBackColor = false;
-            this.cleanUser_btn.Click += new System.EventHandler(this.cleanUser_btn_Click);
             // 
             // Form1
             // 
@@ -738,9 +739,9 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cleanProxy_btn;
+        private System.Windows.Forms.Button addProxy_btn;
+        private System.Windows.Forms.Button loadProxy_btn;
         private System.Windows.Forms.ListBox proxyList;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;

@@ -27,6 +27,10 @@ namespace vkGroupWall
 
         public void loginBtn_Click(object sender, EventArgs e)
         {
+            TotalCounter.Invalid = 0;
+            TotalCounter.Valid = 0;
+            validAccs_lbl.Text = "0";
+            notValidAccs_lbl.Text = "0";
             if (LoadUsers.users.Count > 0)
             {
                 accsTypes = 0;
@@ -47,52 +51,75 @@ namespace vkGroupWall
 
         public void loginFunc(string login, string pass, int accsType)
         {
-           // loginBtn.BackColor = Color.WhiteSmoke;
-           // loginBtn.Enabled = false;
-
-         //   string login = loginTextBox.Text;
-         //   string password = passTextBox.Text;
+            loginBtn.BeginInvoke((Action)delegate
+            {
+                loginBtn.BackColor = Color.WhiteSmoke;
+                loginBtn.Enabled = false;
+            });
 
             int status = vkLogin.Login(login, pass, html, http); //Login
-           // statusLbl.Text = status.ToString();
 
             if (status == 1)
             {
-                if (accsType == 0)
-                {
+              //  if (accsType == 0)
+              //  {
                     validAccs_lbl.BeginInvoke((Action)delegate
                     {
                         validAccs_lbl.Text = TotalCounter.ValidAccs().ToString();
                     });
-                }
-                /*loginBtn.Enabled = false;
-                loginBtn.BackColor = Color.WhiteSmoke;
-                loadFromFile_btn.BackColor = Color.DarkGray;
-                loadFromFile_btn.Enabled = true;
-                logout_btn.Enabled = true;
-                logout_btn.BackColor = Color.DarkGray;
-                loginTextBox.Enabled = false;
-                passTextBox.Enabled = false;
-                if (LoadList.groups.Count > 0)
+              //  }
+
+                panel1.BeginInvoke((Action)delegate
                 {
-                    postBtn.Enabled = true;
-                    messageTB.Enabled = true;
-                    postBtn.BackColor = Color.DarkGray;
-                }*/
+                    loginBtn.Enabled = false;
+                    loginBtn.BackColor = Color.WhiteSmoke;
+                    loadFromFile_btn.BackColor = Color.DarkGray;
+                    loadFromFile_btn.Enabled = true;
+                    logout_btn.Enabled = true;
+                    logout_btn.BackColor = Color.DarkGray;
+                    loginTextBox.Enabled = false;
+                    passTextBox.Enabled = false;
+                    loadAccFromFile.Enabled = false;
+                    loadAccFromFile.BackColor = Color.WhiteSmoke;
+                    cleanUser_btn.Enabled = false;
+                    cleanUser_btn.BackColor = Color.WhiteSmoke;
+                    if (LoadList.groups.Count > 0)
+                    {
+                        postBtn.Enabled = true;
+                        messageTB.Enabled = true;
+                        postBtn.BackColor = Color.DarkGray;
+                    }
+                });
             }
             else
             {
-                /*loginTextBox.Enabled = true;
-                passTextBox.Enabled = true;
-                logout_btn.Enabled = false;
-                logout_btn.BackColor = Color.WhiteSmoke;
-                loginBtn.BackColor = Color.DarkGray;
-                loginBtn.Enabled = true;
-                postBtn.BackColor = Color.WhiteSmoke;
-                loadFromFile_btn.BackColor = Color.WhiteSmoke;
-                loadFromFile_btn.Enabled = false;
-                postBtn.Enabled = false;
-                messageTB.Enabled = false;*/
+                panel1.BeginInvoke((Action)delegate
+                {
+                    loginTextBox.Enabled = true;
+                    passTextBox.Enabled = true;
+                    logout_btn.Enabled = false;
+                    logout_btn.BackColor = Color.WhiteSmoke;
+                    loginBtn.BackColor = Color.DarkGray;
+                    loginBtn.Enabled = true;
+                    postBtn.BackColor = Color.WhiteSmoke;
+                    loadFromFile_btn.BackColor = Color.WhiteSmoke;
+                    loadFromFile_btn.Enabled = false;
+                    postBtn.Enabled = false;
+                    messageTB.Enabled = false;
+                    loadAccFromFile.Enabled = true;
+                    loadAccFromFile.BackColor = Color.DarkGray;
+                    if (LoadUsers.users.Count > 0)
+                    {
+                        cleanUser_btn.Enabled = true;
+                        cleanUser_btn.BackColor = Color.DarkGray;
+                    }
+                    else
+                    {
+                        cleanUser_btn.Enabled = false;
+                        cleanUser_btn.BackColor = Color.WhiteSmoke;
+                    }
+                });
+
                 if (accsType == 1)
                     MessageBox.Show("Неверный пароль или аккаунт заблокирован");
                 else
@@ -187,7 +214,7 @@ namespace vkGroupWall
             {
                 groupList.Items.Clear();
                 path = openFileDialog.FileName;
-                LoadList.loadList(path);
+                LoadList.loadGroupList(path);
             }
             
             for (int i = 0; i < LoadList.groups.Count; i++)
@@ -214,7 +241,6 @@ namespace vkGroupWall
 
         private void clean_btn_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show(groupList.Items.Count + " " + LoadList.groups.Count);
             groupList.Items.Clear();
             clean_btn.Enabled = false;
             clean_btn.BackColor = Color.WhiteSmoke;
@@ -275,6 +301,18 @@ namespace vkGroupWall
             messageTB.Enabled = false;
             postBtn.Enabled = false;
             postBtn.BackColor = Color.WhiteSmoke;
+            loadAccFromFile.Enabled = true;
+            loadAccFromFile.BackColor = Color.DarkGray;
+            if (LoadUsers.users.Count > 0)
+            {
+                cleanUser_btn.Enabled = true;
+                cleanUser_btn.BackColor = Color.DarkGray;
+            }
+            else
+            {
+                cleanUser_btn.Enabled = false;
+                cleanUser_btn.BackColor = Color.WhiteSmoke;
+            }
         }
 
         public void postNotActive()
@@ -337,6 +375,57 @@ namespace vkGroupWall
             TotalCounter.Valid = 0;
             validAccs_lbl.Text = "0";
             notValidAccs_lbl.Text = "0";
+        }
+
+        private void loadProxy_btn_Click(object sender, EventArgs e)
+        {
+            string path;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                proxyList.Items.Clear();
+                path = openFileDialog.FileName;
+                LoadList.loadProxyList(path);
+            }
+
+            for (int i = 0; i < LoadList.proxys.Count; i++)
+            {
+                proxyList.Items.Add(LoadList.proxys[i]);
+            }
+
+            if (LoadList.proxys.Count > 0)
+            {
+                cleanProxy_btn.Enabled = true;
+                cleanProxy_btn.BackColor = Color.DarkGray;
+            }
+        }
+
+        private void addProxy_btn_Click(object sender, EventArgs e)
+        {
+            string str;
+            AddProxyForm APF = new AddProxyForm();
+            APF.ShowDialog();
+
+            if (APF.proxyLogin != "" && APF.proxyPass != "")
+                str = APF.proxyIP+":"+APF.proxyPort+"/"+APF.proxyLogin+","+APF.proxyPass;
+            else
+                str = APF.proxyIP + ":" + APF.proxyPort;
+
+
+            proxyList.Items.Add(str);
+            LoadList.proxys.Add(str);
+
+            if (proxyList.Items.Count > 0)
+            {
+                cleanProxy_btn.Enabled = true;
+                cleanProxy_btn.BackColor = Color.DarkGray;
+            }
+        }
+
+        private void cleanProxy_btn_Click(object sender, EventArgs e)
+        {
+            proxyList.Items.Clear();
+            cleanProxy_btn.Enabled = false;
+            cleanProxy_btn.BackColor = Color.WhiteSmoke;
         }
 
 
