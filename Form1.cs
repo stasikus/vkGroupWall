@@ -31,12 +31,16 @@ namespace vkGroupWall
             TotalCounter.Valid = 0;
             validAccs_lbl.Text = "0";
             notValidAccs_lbl.Text = "0";
+
+            Random random = new Random();
+            int j = proxyList.Items.Count;
+
             if (LoadUsers.users.Count > 0)
             {
                 accsTypes = 0;
                 for (int i = 0; i < LoadUsers.users.Count; i++)
                 {
-                    Thread tr = new Thread(() => loginFunc(LoadUsers.userDictionary.ElementAt(i).Key, LoadUsers.userDictionary.ElementAt(i).Value, accsTypes));
+                    Thread tr = new Thread(() => loginFunc(LoadUsers.userDictionary.ElementAt(i).Key, LoadUsers.userDictionary.ElementAt(i).Value, accsTypes, proxyList.Items[(random.Next(1, j))-1].ToString()));
                     tr.IsBackground = true;
                     tr.Start();
                     Thread.Sleep(1000);
@@ -45,11 +49,15 @@ namespace vkGroupWall
             else
             {
                 accsTypes = 1;
-                loginFunc(loginTextBox.Text, passTextBox.Text, accsTypes);
+
+                if(proxyList.Items.Count != 0)
+                    loginFunc(loginTextBox.Text, passTextBox.Text, accsTypes, proxyList.Items[0].ToString());
+                else
+                    loginFunc(loginTextBox.Text, passTextBox.Text, accsTypes, "");
             }
         }
 
-        public void loginFunc(string login, string pass, int accsType)
+        public void loginFunc(string login, string pass, int accsType, string proxys)
         {
             loginBtn.BeginInvoke((Action)delegate
             {
@@ -57,7 +65,7 @@ namespace vkGroupWall
                 loginBtn.Enabled = false;
             });
 
-            int status = vkLogin.Login(login, pass, html, http); //Login
+            int status = vkLogin.Login(login, pass, html, http, proxys); //Login
 
             if (status == 1)
             {
@@ -147,7 +155,7 @@ namespace vkGroupWall
 
             for (int i = 0; i < groupList.Items.Count; i++)
             {
-                string html = http.GetHtml("https://vk.com/" + groupList.Items[i].ToString(), "");
+                string html = http.GetHtml("https://vk.com/" + groupList.Items[i].ToString(), "", "");
 
                 string groupID = html.Remove(0, html.IndexOf("\"group_id\":") + 11);
                 groupID = groupID.Substring(0, groupID.IndexOf(","));
