@@ -21,11 +21,8 @@ namespace vkGroupWall
         public string GetHtml(string url, string postData, string proxys) //Возвращает содержимое поданной страницы
         {
             string HTML = "";
-
             Regex rex1 = new Regex("remixsid=(.*?);", RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
-            if (url == "0") return "0"; //Проверка на ошибку
             HttpWebRequest myHttpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
-            //myHttpWebRequest.Proxy = new WebProxy("127.0.0.1", 8888); //В перспективе можно использовать прокси
 
             if (proxys != "")
             {
@@ -35,8 +32,9 @@ namespace vkGroupWall
                 myHttpWebRequest.Proxy = proxy;
             }
 
-            //if (!String.IsNullOrEmpty(postData)) 
-            myHttpWebRequest.Method = "POST";
+            if (!String.IsNullOrEmpty(postData))
+                myHttpWebRequest.Method = "POST";
+
             myHttpWebRequest.Referer = "https://vk.com";
             myHttpWebRequest.UserAgent = "Mozila/14.0 (compatible; MSIE 6.0;Windows NT 5.1; SV1; MyIE2;";
             myHttpWebRequest.Accept = "image/gif, image/x-xbitmap, image/jpeg,image/pjpeg, application/x-shockwave-flash,application/vnd.ms-excel,application/vnd.ms-powerpoint,application/msword";
