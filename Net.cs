@@ -18,7 +18,7 @@ namespace vkGroupWall
         string remixsid;  //Id сессии
         public string lastCookies; //Куки
 
-        public string GetHtml(string url, string postData) //Возвращает содержимое поданной страницы
+        public string GetHtml(string url, string postData, string proxys) //Возвращает содержимое поданной страницы
         {
             string HTML = "";
 
@@ -27,13 +27,16 @@ namespace vkGroupWall
             HttpWebRequest myHttpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
             //myHttpWebRequest.Proxy = new WebProxy("127.0.0.1", 8888); //В перспективе можно использовать прокси
 
-            WebProxy proxy = new WebProxy("41.223.119.156", 3128);
-            myHttpWebRequest.Proxy = proxy;
+            if (proxys != "")
+            {
+                string proxyIp = proxys.Substring(0, proxys.IndexOf(":"));
+                int proxyPort = Convert.ToInt32(proxys.Remove(0, proxys.IndexOf(":") + 1));
+                IWebProxy proxy = new WebProxy(proxyIp, proxyPort);
+                myHttpWebRequest.Proxy = proxy;
+            }
 
-            if (!String.IsNullOrEmpty(postData)) myHttpWebRequest.Method = "POST";
-
-            
-
+            //if (!String.IsNullOrEmpty(postData)) 
+            myHttpWebRequest.Method = "POST";
             myHttpWebRequest.Referer = "https://vk.com";
             myHttpWebRequest.UserAgent = "Mozila/14.0 (compatible; MSIE 6.0;Windows NT 5.1; SV1; MyIE2;";
             myHttpWebRequest.Accept = "image/gif, image/x-xbitmap, image/jpeg,image/pjpeg, application/x-shockwave-flash,application/vnd.ms-excel,application/vnd.ms-powerpoint,application/msword";
@@ -86,7 +89,7 @@ namespace vkGroupWall
                 HTML = myStreamReader.ReadToEnd();
                 if (HTML == "") //Проверяем на редирект
                 {
-                    HTML = this.GetHtml(myHttpWebResponse.Headers["Location"].ToString(), "");
+                    HTML = this.GetHtml(myHttpWebResponse.Headers["Location"].ToString(), "", "");
 
                 }
              }
@@ -197,7 +200,7 @@ namespace vkGroupWall
 
                 if (HTML == "") //Проверяем на редирект
                 {
-                    HTML = this.GetHtml(myHttpWebResponse.Headers["Location"].ToString(), "");
+                    HTML = this.GetHtml(myHttpWebResponse.Headers["Location"].ToString(), "", "");
 
                 }
             }
@@ -264,7 +267,7 @@ namespace vkGroupWall
 
                 if (HTML == "") //Проверяем на редирект
                 {
-                    HTML = this.GetHtml(myHttpWebResponse.Headers["Location"].ToString(), "");
+                    HTML = this.GetHtml(myHttpWebResponse.Headers["Location"].ToString(), "", "");
 
                 }
             }
