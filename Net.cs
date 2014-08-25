@@ -75,7 +75,11 @@ namespace vkGroupWall
                 Match matc1 = rex1.Match(lastCookies);
 
                 //Если есть имя сессии, то подменяем Cookie 
-                if (matc1.Groups.Count == 2) { this.remixsid = matc1.Groups[1].ToString(); lastCookies = "remixchk=5;remixsid=" + this.remixsid; }
+                if (matc1.Groups.Count == 2) 
+                { 
+                    this.remixsid = matc1.Groups[1].ToString(); 
+                    lastCookies = "remixchk=5;remixsid=" + this.remixsid; 
+                }
                 if (myHttpWebResponse.Headers["Content-Type"].IndexOf("windows-1251") > 0)
                 {
                     myStreamReader = new StreamReader(myHttpWebResponse.GetResponseStream(), Encoding.GetEncoding("windows-1251"));
@@ -106,9 +110,6 @@ namespace vkGroupWall
             Regex rex1 = new Regex("remixsid=(.*?);", RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
             if (url == "0") return "0"; //Проверка на ошибку
             HttpWebRequest myHttpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
-
-            WebProxy proxy = new WebProxy("41.223.119.156", 3128);
-            myHttpWebRequest.Proxy = proxy;
 
             if (!String.IsNullOrEmpty(idGroup)) myHttpWebRequest.Method = "POST";
             myHttpWebRequest.Referer = "https://vk.com/" + idGroup;
@@ -179,7 +180,7 @@ namespace vkGroupWall
                     if (errorHtml == -1)
                     {
                         string captchaSid = HTML.Substring(startHtml, HTML.IndexOf("<!>0"));
-
+                       // string captchaSid = HTML.Substring(startHtml);
                         InputCaptchaForm inputForm = new InputCaptchaForm(ref captchaSid);
                         inputForm.ShowDialog();
                         captchaFromForm = inputForm.capchaNum;

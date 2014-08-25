@@ -130,7 +130,6 @@
             // postBtn
             // 
             this.postBtn.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.postBtn.Enabled = false;
             this.postBtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.postBtn.Location = new System.Drawing.Point(6, 516);
             this.postBtn.Name = "postBtn";
@@ -142,7 +141,6 @@
             // 
             // messageTB
             // 
-            this.messageTB.Enabled = false;
             this.messageTB.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.messageTB.Location = new System.Drawing.Point(6, 19);
             this.messageTB.Multiline = true;
@@ -192,7 +190,6 @@
             // loadFromFile_btn
             // 
             this.loadFromFile_btn.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.loadFromFile_btn.Enabled = false;
             this.loadFromFile_btn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.loadFromFile_btn.ForeColor = System.Drawing.SystemColors.ControlText;
             this.loadFromFile_btn.Location = new System.Drawing.Point(6, 550);

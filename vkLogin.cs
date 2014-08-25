@@ -22,7 +22,6 @@ namespace vkGroupWall
             userid = matc4.Groups[1].ToString().Replace("/", "");
 
             html = http.GetHtml("https://vk.com/" + userid, "", proxys);
-            //Testlogin(html);
 
             if (html.IndexOf("login?act=blocked") > 0)
             {
@@ -41,10 +40,5 @@ namespace vkGroupWall
             }
             return 1;
         }
-
-       // private static int Testlogin(string html)
-      //  {
-            
-      //  }
     }
 }

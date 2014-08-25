@@ -24,6 +24,8 @@ namespace vkGroupWall
         Net http = new Net(); //Создаем объект
         string html = "";
         int accsTypes;
+        public static Dictionary<string, string> activeUsersList = new Dictionary<string, string>();
+        public int messageCounter = 0;
 
         public void loginBtn_Click(object sender, EventArgs e)
         {
@@ -40,20 +42,37 @@ namespace vkGroupWall
                 accsTypes = 0;
                 for (int i = 0; i < LoadUsers.users.Count; i++)
                 {
-                    Thread tr = new Thread(() => loginFunc(LoadUsers.userDictionary.ElementAt(i).Key, LoadUsers.userDictionary.ElementAt(i).Value, accsTypes, proxyList.Items[(random.Next(1, j))-1].ToString()));
-                    tr.IsBackground = true;
-                    tr.Start();
-                    Thread.Sleep(1000);
+                    Thread tr = new Thread(() => loginFunc(LoadUsers.userDictionary.ElementAt(i).Key, LoadUsers.userDictionary.ElementAt(i).Value, accsTypes, proxyList.Items[(random.Next(1, j)) - 1].ToString()));
+                    Thread tr1 = new Thread(() => loginFunc(LoadUsers.userDictionary.ElementAt(i).Key, LoadUsers.userDictionary.ElementAt(i).Value, accsTypes, ""));
+                    if (proxyList.Items.Count != 0)
+                    {
+                        tr.IsBackground = true;
+                        tr.Start();
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        tr1.IsBackground = true;
+                        tr1.Start();
+                        Thread.Sleep(1000);
+                    }
                 }
             }
             else
             {
                 accsTypes = 1;
-
-                if(proxyList.Items.Count != 0)
-                    loginFunc(loginTextBox.Text, passTextBox.Text, accsTypes, proxyList.Items[0].ToString());
+                Thread tr = new Thread(() => loginFunc(loginTextBox.Text, passTextBox.Text, accsTypes, proxyList.Items[0].ToString()));
+                Thread tr1 = new Thread(() => loginFunc(loginTextBox.Text, passTextBox.Text, accsTypes, ""));
+                if (proxyList.Items.Count != 0)
+                {
+                    tr.IsBackground = true;
+                    tr.Start();
+                }
                 else
-                    loginFunc(loginTextBox.Text, passTextBox.Text, accsTypes, "");
+                {
+                    tr1.IsBackground = true;
+                    tr1.Start();
+                }
             }
         }
 
@@ -69,13 +88,17 @@ namespace vkGroupWall
 
             if (status == 1)
             {
-              //  if (accsType == 0)
-              //  {
+                if (accsType == 0)
+                {
                     validAccs_lbl.BeginInvoke((Action)delegate
                     {
                         validAccs_lbl.Text = TotalCounter.ValidAccs().ToString();
+
                     });
-              //  }
+                    activeUsersList.Add(login, pass);
+
+                    
+                }
 
                 panel1.BeginInvoke((Action)delegate
                 {
@@ -103,7 +126,7 @@ namespace vkGroupWall
             {
                 panel1.BeginInvoke((Action)delegate
                 {
-                    loginTextBox.Enabled = true;
+                 /*   loginTextBox.Enabled = true;
                     passTextBox.Enabled = true;
                     logout_btn.Enabled = false;
                     logout_btn.BackColor = Color.WhiteSmoke;
@@ -111,7 +134,7 @@ namespace vkGroupWall
                     loginBtn.Enabled = true;
                     postBtn.BackColor = Color.WhiteSmoke;
                     loadFromFile_btn.BackColor = Color.WhiteSmoke;
-                    loadFromFile_btn.Enabled = false;
+                  //  loadFromFile_btn.Enabled = false;
                     postBtn.Enabled = false;
                     messageTB.Enabled = false;
                     loadAccFromFile.Enabled = true;
@@ -125,7 +148,7 @@ namespace vkGroupWall
                     {
                         cleanUser_btn.Enabled = false;
                         cleanUser_btn.BackColor = Color.WhiteSmoke;
-                    }
+                    }*/
                 });
 
                 if (accsType == 1)
@@ -153,9 +176,11 @@ namespace vkGroupWall
             if (captcha_manual.Checked != true)
                 inputCaptchaType = false;
 
-            for (int i = 0; i < groupList.Items.Count; i++)
+           // for (messageCounter; messageCounter < groupList.Items.Count; messageCounter++)
+            //{
+            while(messageCounter < groupList.Items.Count)
             {
-                string html = http.GetHtml("https://vk.com/" + groupList.Items[i].ToString(), "", "");
+                string html = http.GetHtml("https://vk.com/" + groupList.Items[messageCounter].ToString(), "", "");
 
                 string groupID = html.Remove(0, html.IndexOf("\"group_id\":") + 11);
                 groupID = groupID.Substring(0, groupID.IndexOf(","));
@@ -171,7 +196,7 @@ namespace vkGroupWall
                     idForPost = publicID;
 
                 string post = "Message=" + System.Web.HttpUtility.UrlEncode(messageTB.Text) + "&act=post&al=1&facebook_export=&fixed=&friends_only=&from=&hash=" + hash + "&official=&signed=&status_export=&to_id=-" + idForPost + "&type=all";
-                string htmlResp = http.PostMessage("https://vk.com/al_wall.php", groupList.Items[i].ToString(), post, messageTB.Text, hash, idForPost, inputCaptchaType, antigateKey_TB.Text);
+                string htmlResp = http.PostMessage("https://vk.com/al_wall.php", groupList.Items[messageCounter].ToString(), post, messageTB.Text, hash, idForPost, inputCaptchaType, antigateKey_TB.Text);
 
                 int errorHtml = htmlResp.IndexOf("<!>8<!>");
 
@@ -191,14 +216,15 @@ namespace vkGroupWall
                     });
                 }
 
-                
+                messageCounter++;
             }
-            MessageBox.Show("Все сообщения были отправлены");
+              
+          /*  MessageBox.Show("Все сообщения были отправлены");
             panel1.BeginInvoke((Action)delegate
             {
                 panel1.Enabled = true;
                 postActive();
-            });
+            });*/
         }
 
         private void postBtn_Click(object sender, EventArgs e)
@@ -435,10 +461,5 @@ namespace vkGroupWall
             cleanProxy_btn.Enabled = false;
             cleanProxy_btn.BackColor = Color.WhiteSmoke;
         }
-
-
-
     }
-
-
 }
