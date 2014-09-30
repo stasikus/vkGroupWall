@@ -95,7 +95,6 @@
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.Size = new System.Drawing.Size(150, 22);
             this.loginTextBox.TabIndex = 0;
-            this.loginTextBox.Text = "staslk@ukr.net";
             // 
             // passTextBox
             // 
@@ -105,7 +104,6 @@
             this.passTextBox.PasswordChar = '*';
             this.passTextBox.Size = new System.Drawing.Size(150, 22);
             this.passTextBox.TabIndex = 1;
-            this.passTextBox.Text = "S83v11875";
             // 
             // loginBtn
             // 
@@ -511,7 +509,6 @@
             // cleanUser_btn
             // 
             this.cleanUser_btn.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.cleanUser_btn.Enabled = false;
             this.cleanUser_btn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cleanUser_btn.Location = new System.Drawing.Point(215, 9);
             this.cleanUser_btn.Name = "cleanUser_btn";

@@ -37,20 +37,20 @@ namespace vkGroupWall
             Random random = new Random();
             int j = proxyList.Items.Count;
 
-            if (LoadUsers.users.Count > 0)
+            if (LoadUsers.users.Count > 0) //если юзеров много (с файла)
             {
                 accsTypes = 0;
                 for (int i = 0; i < LoadUsers.users.Count; i++)
                 {
                     Thread tr = new Thread(() => loginFunc(LoadUsers.userDictionary.ElementAt(i).Key, LoadUsers.userDictionary.ElementAt(i).Value, accsTypes, proxyList.Items[(random.Next(1, j)) - 1].ToString()));
                     Thread tr1 = new Thread(() => loginFunc(LoadUsers.userDictionary.ElementAt(i).Key, LoadUsers.userDictionary.ElementAt(i).Value, accsTypes, ""));
-                    if (proxyList.Items.Count != 0)
+                    if (proxyList.Items.Count != 0) //если есть прокси
                     {
                         tr.IsBackground = true;
                         tr.Start();
                         Thread.Sleep(1000);
                     }
-                    else
+                    else //если нет прокси
                     {
                         tr1.IsBackground = true;
                         tr1.Start();
@@ -80,13 +80,13 @@ namespace vkGroupWall
         {
             loginBtn.BeginInvoke((Action)delegate
             {
-                loginBtn.BackColor = Color.WhiteSmoke;
-                loginBtn.Enabled = false;
+              //  loginBtn.BackColor = Color.WhiteSmoke;
+              //  loginBtn.Enabled = false;
             });
 
             int status = vkLogin.Login(login, pass, html, http, proxys); //Login
 
-            if (status == 1)
+            if (status == 1) // валидный акк
             {
                 if (accsType == 0)
                 {
@@ -102,53 +102,53 @@ namespace vkGroupWall
 
                 panel1.BeginInvoke((Action)delegate
                 {
-                    loginBtn.Enabled = false;
-                    loginBtn.BackColor = Color.WhiteSmoke;
-                    loadFromFile_btn.BackColor = Color.DarkGray;
-                    loadFromFile_btn.Enabled = true;
-                    logout_btn.Enabled = true;
-                    logout_btn.BackColor = Color.DarkGray;
-                    loginTextBox.Enabled = false;
-                    passTextBox.Enabled = false;
-                    loadAccFromFile.Enabled = false;
-                    loadAccFromFile.BackColor = Color.WhiteSmoke;
-                    cleanUser_btn.Enabled = false;
-                    cleanUser_btn.BackColor = Color.WhiteSmoke;
-                    if (LoadList.groups.Count > 0)
-                    {
-                        postBtn.Enabled = true;
-                        messageTB.Enabled = true;
-                        postBtn.BackColor = Color.DarkGray;
-                    }
-                });
-            }
-            else
-            {
-                panel1.BeginInvoke((Action)delegate
-                {
-                 /*   loginTextBox.Enabled = true;
-                    passTextBox.Enabled = true;
-                    logout_btn.Enabled = false;
-                    logout_btn.BackColor = Color.WhiteSmoke;
-                    loginBtn.BackColor = Color.DarkGray;
-                    loginBtn.Enabled = true;
-                    postBtn.BackColor = Color.WhiteSmoke;
-                    loadFromFile_btn.BackColor = Color.WhiteSmoke;
-                  //  loadFromFile_btn.Enabled = false;
-                    postBtn.Enabled = false;
-                    messageTB.Enabled = false;
-                    loadAccFromFile.Enabled = true;
-                    loadAccFromFile.BackColor = Color.DarkGray;
-                    if (LoadUsers.users.Count > 0)
-                    {
-                        cleanUser_btn.Enabled = true;
-                        cleanUser_btn.BackColor = Color.DarkGray;
-                    }
-                    else
-                    {
-                        cleanUser_btn.Enabled = false;
-                        cleanUser_btn.BackColor = Color.WhiteSmoke;
-                    }*/
+                    /* loginBtn.Enabled = false;
+                     loginBtn.BackColor = Color.WhiteSmoke;
+                     loadFromFile_btn.BackColor = Color.DarkGray;
+                     loadFromFile_btn.Enabled = true;
+                     logout_btn.Enabled = true;
+                     logout_btn.BackColor = Color.DarkGray;
+                     loginTextBox.Enabled = false;
+                     passTextBox.Enabled = false;
+                     loadAccFromFile.Enabled = false;
+                     loadAccFromFile.BackColor = Color.WhiteSmoke;
+                     cleanUser_btn.Enabled = false;
+                     cleanUser_btn.BackColor = Color.WhiteSmoke; */
+                     if (LoadList.groups.Count > 0)
+                     {
+                          /* postBtn.Enabled = true;
+                         messageTB.Enabled = true;
+                         postBtn.BackColor = Color.DarkGray;*/
+                     }
+                 });
+             }
+             else
+             {
+                 panel1.BeginInvoke((Action)delegate
+                 {
+                  /*   loginTextBox.Enabled = true;
+                     passTextBox.Enabled = true;
+                     logout_btn.Enabled = false;
+                     logout_btn.BackColor = Color.WhiteSmoke;
+                     loginBtn.BackColor = Color.DarkGray;
+                     loginBtn.Enabled = true;
+                     postBtn.BackColor = Color.WhiteSmoke;
+                     loadFromFile_btn.BackColor = Color.WhiteSmoke;
+                   //  loadFromFile_btn.Enabled = false;
+                     postBtn.Enabled = false;
+                     messageTB.Enabled = false;
+                     loadAccFromFile.Enabled = true;
+                     loadAccFromFile.BackColor = Color.DarkGray;
+                     if (LoadUsers.users.Count > 0)
+                     {
+                         cleanUser_btn.Enabled = true;
+                         cleanUser_btn.BackColor = Color.DarkGray;
+                     }
+                     else
+                     {
+                         cleanUser_btn.Enabled = false;
+                         cleanUser_btn.BackColor = Color.WhiteSmoke;
+                     }*/
                 });
 
                 if (accsType == 1)
@@ -200,14 +200,14 @@ namespace vkGroupWall
 
                 int errorHtml = htmlResp.IndexOf("<!>8<!>");
 
-                if (errorHtml == -1)
+                if (errorHtml == -1) // сообщений отправленно
                 {
                     totalMessage_lbl.BeginInvoke((Action)delegate
                     {
                         totalMessage_lbl.Text = TotalCounter.SuccessMessages().ToString();
                     });
                 }
-                else
+                else // сообщений не отправленно
                 {
 
                     totalErrorMsg_lbl.BeginInvoke((Action)delegate
@@ -258,17 +258,17 @@ namespace vkGroupWall
 
             if (LoadList.groups.Count > 0)
             {
-                clean_btn.Enabled = true;
-                clean_btn.BackColor = Color.DarkGray;
+              //  clean_btn.Enabled = true;
+              //  clean_btn.BackColor = Color.DarkGray;
                 if (statusLbl.Text == "1")
                 {
-                    postBtn.BackColor = Color.DarkGray;
-                    postBtn.Enabled = true;
-                    messageTB.Enabled = true;
+               //     postBtn.BackColor = Color.DarkGray;
+               //     postBtn.Enabled = true;
+               //     messageTB.Enabled = true;
                 }
                 else
                 {
-                    postBtn.BackColor = Color.WhiteSmoke;
+              //      postBtn.BackColor = Color.WhiteSmoke;
                 }
             }
         }
@@ -276,8 +276,8 @@ namespace vkGroupWall
         private void clean_btn_Click(object sender, EventArgs e)
         {
             groupList.Items.Clear();
-            clean_btn.Enabled = false;
-            clean_btn.BackColor = Color.WhiteSmoke;
+           // clean_btn.Enabled = false;
+           // clean_btn.BackColor = Color.WhiteSmoke;
         }
 
         private void check_balance_btn_Click(object sender, EventArgs e)
@@ -308,66 +308,66 @@ namespace vkGroupWall
         {
             if (captcha_manual.Checked == true)
             {
-                antigateKey_TB.Enabled = false;
-                check_balance_btn.Enabled = false;
-                check_balance_btn.BackColor = Color.WhiteSmoke;
+           //     antigateKey_TB.Enabled = false;
+           //     check_balance_btn.Enabled = false;
+           //     check_balance_btn.BackColor = Color.WhiteSmoke;
             }
             else
             {
-                antigateKey_TB.Enabled = true;
-                check_balance_btn.Enabled = true;
-                check_balance_btn.BackColor = Color.DarkGray;
+             //   antigateKey_TB.Enabled = true;
+             //   check_balance_btn.Enabled = true;
+             //   check_balance_btn.BackColor = Color.DarkGray;
             }
         }
 
         private void logout_btn_Click(object sender, EventArgs e)
         {
-            loginTextBox.Enabled = true;
-            passTextBox.Enabled = true;
-            loginBtn.Enabled = true;
-            loginBtn.BackColor = Color.DarkGray;
-            logout_btn.Enabled = false;
-            logout_btn.BackColor = Color.WhiteSmoke;
-            loadFromFile_btn.Enabled = false;
-            loadFromFile_btn.BackColor = Color.WhiteSmoke;
-            clean_btn.Enabled = false;
-            clean_btn.BackColor = Color.WhiteSmoke;
-            messageTB.Enabled = false;
-            postBtn.Enabled = false;
-            postBtn.BackColor = Color.WhiteSmoke;
-            loadAccFromFile.Enabled = true;
-            loadAccFromFile.BackColor = Color.DarkGray;
-            if (LoadUsers.users.Count > 0)
-            {
-                cleanUser_btn.Enabled = true;
-                cleanUser_btn.BackColor = Color.DarkGray;
-            }
-            else
-            {
-                cleanUser_btn.Enabled = false;
-                cleanUser_btn.BackColor = Color.WhiteSmoke;
-            }
+            /*    loginTextBox.Enabled = true;
+                passTextBox.Enabled = true;
+                loginBtn.Enabled = true;
+                loginBtn.BackColor = Color.DarkGray;
+                logout_btn.Enabled = false;
+                logout_btn.BackColor = Color.WhiteSmoke;
+                loadFromFile_btn.Enabled = false;
+                loadFromFile_btn.BackColor = Color.WhiteSmoke;
+                clean_btn.Enabled = false;
+                clean_btn.BackColor = Color.WhiteSmoke;
+                messageTB.Enabled = false;
+                postBtn.Enabled = false;
+                postBtn.BackColor = Color.WhiteSmoke;
+                loadAccFromFile.Enabled = true;
+                loadAccFromFile.BackColor = Color.DarkGray;
+                if (LoadUsers.users.Count > 0)
+                {
+                    cleanUser_btn.Enabled = true;
+                    cleanUser_btn.BackColor = Color.DarkGray;
+                }
+                else
+                {
+                    cleanUser_btn.Enabled = false;
+                    cleanUser_btn.BackColor = Color.WhiteSmoke;
+                }*/
         }
 
         public void postNotActive()
         {
-            postBtn.BackColor = Color.WhiteSmoke;
-            logout_btn.BackColor = Color.WhiteSmoke;
-            loadFromFile_btn.BackColor = Color.WhiteSmoke;
-            clean_btn.BackColor = Color.WhiteSmoke;
-            check_balance_btn.BackColor = Color.WhiteSmoke;
+            //postBtn.BackColor = Color.WhiteSmoke;
+            //logout_btn.BackColor = Color.WhiteSmoke;
+            //loadFromFile_btn.BackColor = Color.WhiteSmoke;
+            //clean_btn.BackColor = Color.WhiteSmoke;
+            //check_balance_btn.BackColor = Color.WhiteSmoke;
         }
 
         public void postActive()
         {
-            postBtn.BackColor = Color.DarkGray;
-            logout_btn.BackColor = Color.DarkGray;
-            loadFromFile_btn.BackColor = Color.DarkGray;
-            clean_btn.BackColor = Color.DarkGray;
+            //postBtn.BackColor = Color.DarkGray;
+            //logout_btn.BackColor = Color.DarkGray;
+            //loadFromFile_btn.BackColor = Color.DarkGray;
+            //clean_btn.BackColor = Color.DarkGray;
 
-            if(captcha_antigate.Checked == true)
-                check_balance_btn.BackColor = Color.DarkGray;
-        }
+            //if(captcha_antigate.Checked == true)
+            //    check_balance_btn.BackColor = Color.DarkGray;
+        } 
 
         private void loadAccFromFile_Click(object sender, EventArgs e)
         {
@@ -381,17 +381,17 @@ namespace vkGroupWall
             if (LoadUsers.users.Count != 0)
             {
                 loadAccs_lbl.Text = LoadUsers.users.Count.ToString();
-                cleanUser_btn.Enabled = true;
-                cleanUser_btn.BackColor = Color.DarkGray;
-                loginTextBox.Enabled = false;
-                passTextBox.Enabled = false;
+           //     cleanUser_btn.Enabled = true;
+           //     cleanUser_btn.BackColor = Color.DarkGray;
+           //     loginTextBox.Enabled = false;
+            //    passTextBox.Enabled = false;
             }
             else
             {
-                cleanUser_btn.Enabled = false;
-                cleanUser_btn.BackColor = Color.WhiteSmoke;
-                loginTextBox.Enabled = true;
-                passTextBox.Enabled = true;
+           //     cleanUser_btn.Enabled = false;
+          //      cleanUser_btn.BackColor = Color.WhiteSmoke;
+          //      loginTextBox.Enabled = true;
+          //      passTextBox.Enabled = true;
                 MessageBox.Show("В файле не найдено юзеров");
             }
         }
@@ -400,10 +400,10 @@ namespace vkGroupWall
         {
             LoadUsers.users.Clear();
             LoadUsers.userDictionary.Clear();
-            cleanUser_btn.Enabled = false;
-            cleanUser_btn.BackColor = Color.WhiteSmoke;
-            loginTextBox.Enabled = true;
-            passTextBox.Enabled = true;
+     //       cleanUser_btn.Enabled = false;
+     //       cleanUser_btn.BackColor = Color.WhiteSmoke;
+     //       loginTextBox.Enabled = true;
+      //      passTextBox.Enabled = true;
             loadAccs_lbl.Text = "0";
             TotalCounter.Invalid = 0;
             TotalCounter.Valid = 0;
@@ -428,8 +428,8 @@ namespace vkGroupWall
 
             if (LoadList.proxys.Count > 0)
             {
-                cleanProxy_btn.Enabled = true;
-                cleanProxy_btn.BackColor = Color.DarkGray;
+       //         cleanProxy_btn.Enabled = true;
+       //         cleanProxy_btn.BackColor = Color.DarkGray;
             }
         }
 
@@ -450,16 +450,16 @@ namespace vkGroupWall
 
             if (proxyList.Items.Count > 0)
             {
-                cleanProxy_btn.Enabled = true;
-                cleanProxy_btn.BackColor = Color.DarkGray;
+         //       cleanProxy_btn.Enabled = true;
+         //       cleanProxy_btn.BackColor = Color.DarkGray;
             }
         }
 
         private void cleanProxy_btn_Click(object sender, EventArgs e)
         {
             proxyList.Items.Clear();
-            cleanProxy_btn.Enabled = false;
-            cleanProxy_btn.BackColor = Color.WhiteSmoke;
+       //     cleanProxy_btn.Enabled = false;
+       //     cleanProxy_btn.BackColor = Color.WhiteSmoke;
         }
     }
 }
